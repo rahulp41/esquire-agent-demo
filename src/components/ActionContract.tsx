@@ -25,7 +25,7 @@ export function Countdown({ expiresAt }: { expiresAt: string }) {
 function DiffTable({ diff }: { diff: ActionIntent["diff"] }) {
   if (diff.length === 0) {
     return (
-      <p className="text-[13px] text-ink">
+      <p className="text-[13px] text-ink p-4">
         Nothing existing is being changed. This creates something new, so there is no previous
         value to compare against.
       </p>
@@ -175,7 +175,7 @@ export function ActionContract({ intent }: { intent: ActionIntent }) {
       {/* Everything an auditor needs and a decider does not need first. */}
       <Panel flush>
         <Detail defaultOpen={detailDefaultOpen}>
-          <dl className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+          <dl className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <Field label="Intent">
               <span className="mono">{intent.id}</span>
             </Field>
@@ -201,8 +201,8 @@ export function ActionContract({ intent }: { intent: ActionIntent }) {
             </Field>
           </dl>
 
-          <div className="flex items-center justify-between gap-3 mb-1.5">
-            <h3 className="text-[12px] font-bold uppercase tracking-[0.06em] text-navy">
+          <div className="flex items-center justify-between gap-3 mb-1">
+            <h3 className="text-[11px] font-bold uppercase tracking-[0.06em] text-ink/70 font-sans">
               Exact parameters sent to the tool
             </h3>
             {!settled && (

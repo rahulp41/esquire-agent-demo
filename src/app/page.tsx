@@ -22,7 +22,7 @@ export default function MyWork() {
   const total = myPendingIntents.length + myQuestions.length;
 
   return (
-    <div className="space-y-10 max-w-[840px] mx-auto">
+    <div className="space-y-10 max-w-[840px]">
       <div className="space-y-2.5">
         <div>
           <h1 className="text-[24px] font-bold text-navy leading-tight">

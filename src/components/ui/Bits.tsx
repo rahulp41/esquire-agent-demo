@@ -186,7 +186,7 @@ export function Detail({
       <button
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="w-full text-left px-4 py-2 flex items-center gap-2 text-[12px] text-ink hover:bg-[#f7f9fb]"
+        className="w-full text-left px-4 py-3 flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.06em] text-ink/70 font-[family-name:var(--font-display)] hover:bg-[#f7f9fb]"
       >
         <span
           aria-hidden
