@@ -283,33 +283,35 @@ export function ActionContract({ intent }: { intent: ActionIntent }) {
             className="w-full mt-1 border border-line rounded-[8px] px-3 py-2 text-[13px] bg-white"
           />
           <div className="flex flex-wrap items-center gap-2 mt-3">
-            <Button
-              variant="primary"
-              disabled={expired}
-              onClick={() => decide(intent.id, "approved", note, dirty ? params : undefined)}
-            >
-              {dirty ? "Approve the edited change" : "Approve"}
-            </Button>
-            <Button
-              variant="danger"
-              onClick={() => {
-                if (!confirmReject) {
-                  setConfirmReject(true);
-                  return;
-                }
-                if (note.trim()) decide(intent.id, "rejected", note);
-              }}
-            >
-              {confirmReject ? "Confirm rejection" : "Reject"}
-            </Button>
-            <Link href="/">
-              <Button variant="ghost">Decide later</Button>
-            </Link>
-            <span className="text-[12px] text-ink ml-auto max-w-md text-right">
+            <span className="text-[12px] text-ink max-w-md">
               {expired
                 ? "The window closed, so this has gone to the group owner."
                 : `Approving as ${user.name}. The change is made and checked immediately after.`}
             </span>
+            <div className="flex items-center gap-2 ml-auto">
+              <Link href="/">
+                <Button variant="ghost">Decide later</Button>
+              </Link>
+              <Button
+                variant="danger"
+                onClick={() => {
+                  if (!confirmReject) {
+                    setConfirmReject(true);
+                    return;
+                  }
+                  if (note.trim()) decide(intent.id, "rejected", note);
+                }}
+              >
+                {confirmReject ? "Confirm rejection" : "Reject"}
+              </Button>
+              <Button
+                variant="primary"
+                disabled={expired}
+                onClick={() => decide(intent.id, "approved", note, dirty ? params : undefined)}
+              >
+                {dirty ? "Approve the edited change" : "Approve"}
+              </Button>
+            </div>
           </div>
         </Panel>
       )}
