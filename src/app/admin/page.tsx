@@ -93,9 +93,10 @@ export default function ControlRoom() {
             <tbody>
               {automations.map((a) => {
                 const rb = runbooks.find((r) => r.id === a.runbookId);
+                const muted = a.enabled ? "" : "opacity-55";
                 return (
-                  <tr key={a.id} className={a.enabled ? undefined : "opacity-55"}>
-                    <td>
+                  <tr key={a.id}>
+                    <td className={muted}>
                       <Link
                         href={`/admin/config/automations/${a.id}`}
                         className="font-semibold text-navy hover:underline mono leading-[1.1]"
@@ -104,8 +105,10 @@ export default function ControlRoom() {
                       </Link>
                       <div className="text-[11.5px] text-ink">{a.owner}</div>
                     </td>
-                    <td className="max-w-[360px] text-[12.5px]">{describeTrigger(a.trigger)}</td>
-                    <td>
+                    <td className={`max-w-[360px] text-[12.5px] ${muted}`}>
+                      {describeTrigger(a.trigger)}
+                    </td>
+                    <td className={muted}>
                       <Link
                         href={`/admin/runbooks/${a.runbookId}`}
                         className="mono text-navy hover:underline"
@@ -113,16 +116,17 @@ export default function ControlRoom() {
                         {rb?.name ?? a.runbookId}
                       </Link>
                     </td>
-                    <td className="text-[12.5px]">{nameOf(a.agentSlug)}</td>
-                    <td className="text-right tabular">{a.concurrency}</td>
-                    <td className="text-[12px] whitespace-nowrap">
+                    <td className={`text-[12.5px] ${muted}`}>{nameOf(a.agentSlug)}</td>
+                    <td className={`text-right tabular ${muted}`}>{a.concurrency}</td>
+                    <td className={`text-[12px] whitespace-nowrap ${muted}`}>
                       {a.lastPollAt ? ago(a.lastPollAt, nowMs) : <span className="text-ink/40">never</span>}
                     </td>
-                    <td className="text-right tabular">{a.runsLast24h}</td>
+                    <td className={`text-right tabular ${muted}`}>{a.runsLast24h}</td>
                     <td className="text-right whitespace-nowrap">
                       <Button
                         variant={a.enabled ? "secondary" : "primary"}
                         onClick={() => toggleAutomation(a.id)}
+                        className="w-[88px]"
                       >
                         {a.enabled ? "Pause" : "Resume"}
                       </Button>
@@ -180,7 +184,7 @@ export default function ControlRoom() {
                   <td className="text-[12.5px] whitespace-nowrap">{ago(r.startedAt, nowMs)}</td>
                   <td className="mono text-ink/60">{r.sandbox}</td>
                   <td className="text-right">
-                    <Button variant="danger">Stop</Button>
+                    <Button variant="danger" className="w-[88px]">Stop</Button>
                   </td>
                 </tr>
               ))}
@@ -239,7 +243,7 @@ export default function ControlRoom() {
                   </td>
                   <td className="text-right">
                     <a href={q.workItemUrl} target="_blank" rel="noreferrer">
-                      <Button variant="secondary">Answer</Button>
+                      <Button variant="secondary" className="w-[88px]">Answer</Button>
                     </a>
                   </td>
                 </tr>

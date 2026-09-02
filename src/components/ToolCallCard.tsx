@@ -64,7 +64,7 @@ export function ToolCallCard({ call }: { call: ToolCall }) {
       <button
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="w-full text-left px-3 py-1.5 border-t border-line text-[11.5px] text-ink hover:bg-[#f7f9fb] flex items-center gap-2"
+        className="w-full text-left px-3 py-1.5 border-t border-line text-[12px] font-bold uppercase tracking-[0.06em] text-ink/70 font-[family-name:var(--font-display)] hover:bg-[#f7f9fb] flex items-center gap-2"
       >
         <span
           aria-hidden
