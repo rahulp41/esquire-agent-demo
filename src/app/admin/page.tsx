@@ -96,33 +96,33 @@ export default function ControlRoom() {
                 const muted = a.enabled ? "" : "opacity-55";
                 return (
                   <tr key={a.id}>
-                    <td className={muted}>
+                    <td className={`align-baseline ${muted}`}>
                       <Link
                         href={`/admin/config/automations/${a.id}`}
-                        className="font-semibold text-navy hover:underline mono leading-[1.1]"
+                        className="font-semibold text-navy hover:underline mono text-[12.5px] leading-[1.1]"
                       >
                         {a.name}
                       </Link>
                       <div className="text-[11.5px] text-ink">{a.owner}</div>
                     </td>
-                    <td className={`max-w-[360px] text-[12.5px] ${muted}`}>
+                    <td className={`max-w-[360px] text-[12.5px] align-baseline ${muted}`}>
                       {describeTrigger(a.trigger)}
                     </td>
-                    <td className={muted}>
+                    <td className={`align-baseline ${muted}`}>
                       <Link
                         href={`/admin/runbooks/${a.runbookId}`}
-                        className="mono text-navy hover:underline"
+                        className="mono text-[12.5px] text-navy hover:underline"
                       >
                         {rb?.name ?? a.runbookId}
                       </Link>
                     </td>
-                    <td className={`text-[12.5px] ${muted}`}>{nameOf(a.agentSlug)}</td>
-                    <td className={`text-right tabular ${muted}`}>{a.concurrency}</td>
-                    <td className={`text-[12px] whitespace-nowrap ${muted}`}>
+                    <td className={`text-[12.5px] align-baseline ${muted}`}>{nameOf(a.agentSlug)}</td>
+                    <td className={`text-[12.5px] text-right tabular align-baseline ${muted}`}>{a.concurrency}</td>
+                    <td className={`text-[12.5px] whitespace-nowrap align-baseline ${muted}`}>
                       {a.lastPollAt ? ago(a.lastPollAt, nowMs) : <span className="text-ink/40">never</span>}
                     </td>
-                    <td className={`text-right tabular ${muted}`}>{a.runsLast24h}</td>
-                    <td className="text-right whitespace-nowrap">
+                    <td className={`text-[12.5px] text-right tabular align-baseline ${muted}`}>{a.runsLast24h}</td>
+                    <td className="text-right whitespace-nowrap align-middle">
                       <Button
                         variant={a.enabled ? "secondary" : "primary"}
                         onClick={() => toggleAutomation(a.id)}
@@ -167,23 +167,23 @@ export default function ControlRoom() {
             <tbody>
               {running.map((r) => (
                 <tr key={r.id}>
-                  <td>
+                  <td className="align-baseline">
                     <a
                       href={r.workItemUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="mono font-semibold text-navy hover:underline"
+                      className="mono text-[12.5px] font-semibold text-navy hover:underline"
                     >
                       {r.workItem}
                     </a>
                     <div className="text-[12px] text-ink">{r.title}</div>
                   </td>
-                  <td className="mono text-[12px]">{r.automationId.replace("auto-", "")}</td>
-                  <td className="text-[12.5px]">{nameOf(r.agentSlug)}</td>
-                  <td className="text-right tabular">{r.turns}</td>
-                  <td className="text-[12.5px] whitespace-nowrap">{ago(r.startedAt, nowMs)}</td>
-                  <td className="mono text-ink/60">{r.sandbox}</td>
-                  <td className="text-right">
+                  <td className="mono text-[12.5px] align-baseline">{r.automationId.replace("auto-", "")}</td>
+                  <td className="text-[12.5px] align-baseline">{nameOf(r.agentSlug)}</td>
+                  <td className="text-[12.5px] text-right tabular align-baseline">{r.turns}</td>
+                  <td className="text-[12.5px] whitespace-nowrap align-baseline">{ago(r.startedAt, nowMs)}</td>
+                  <td className="mono text-[12.5px] text-ink/60 align-baseline">{r.sandbox}</td>
+                  <td className="text-right align-middle">
                     <Button variant="danger" className="w-[88px]">Stop</Button>
                   </td>
                 </tr>
@@ -222,26 +222,26 @@ export default function ControlRoom() {
             <tbody>
               {waiting.map((q) => (
                 <tr key={q.id}>
-                  <td className="whitespace-nowrap">
+                  <td className="whitespace-nowrap align-baseline">
                     <a
                       href={q.workItemUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="mono font-semibold text-navy hover:underline"
+                      className="mono text-[12.5px] font-semibold text-navy hover:underline"
                     >
                       {q.workItem}
                     </a>
                     <div className="text-[11.5px] text-ink">{nameOf(q.agentSlug)}</div>
                   </td>
-                  <td className="text-[12.5px] max-w-[520px]">{q.question}</td>
-                  <td className="text-[12.5px] whitespace-nowrap">
+                  <td className="text-[12.5px] max-w-[520px] align-baseline">{q.question}</td>
+                  <td className="text-[12.5px] whitespace-nowrap align-baseline">
                     @{q.mentioned}
                     <div className="text-ink/60">{stamp(q.askedAt)}</div>
                   </td>
-                  <td className="text-[12.5px] tabular whitespace-nowrap text-gold-600 font-semibold">
+                  <td className="text-[12.5px] tabular whitespace-nowrap text-gold-600 font-semibold align-baseline">
                     {ago(q.askedAt, nowMs)}
                   </td>
-                  <td className="text-right">
+                  <td className="text-right align-middle">
                     <a href={q.workItemUrl} target="_blank" rel="noreferrer">
                       <Button variant="secondary" className="w-[88px]">Answer</Button>
                     </a>
@@ -281,24 +281,24 @@ export default function ControlRoom() {
                 const o = r.outcome ? OUTCOME[r.outcome] : undefined;
                 return (
                   <tr key={r.id}>
-                    <td>
+                    <td className="align-baseline">
                       <a
                         href={r.workItemUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="mono font-semibold text-navy hover:underline"
+                        className="mono text-[12.5px] font-semibold text-navy hover:underline"
                       >
                         {r.workItem}
                       </a>
                       <div className="text-[12px] text-ink">{r.title}</div>
                       {r.note && <div className="text-[11.5px] text-ink/70 mt-0.5">{r.note}</div>}
                     </td>
-                    <td className="mono text-[12px]">{r.automationId.replace("auto-", "")}</td>
+                    <td className="mono text-[12.5px] align-baseline">{r.automationId.replace("auto-", "")}</td>
                     <td>{o && <Tag tone={o.tone}>{o.label}</Tag>}</td>
-                    <td className="text-right tabular">{r.turns}</td>
-                    <td className="text-right tabular">{duration(r.durationMs)}</td>
-                    <td className="text-right tabular">{usd(r.costUsd)}</td>
-                    <td className="text-[12px] whitespace-nowrap">{ago(r.startedAt, nowMs)}</td>
+                    <td className="text-[12.5px] text-right tabular align-baseline">{r.turns}</td>
+                    <td className="text-[12.5px] text-right tabular align-baseline">{duration(r.durationMs)}</td>
+                    <td className="text-[12.5px] text-right tabular align-baseline">{usd(r.costUsd)}</td>
+                    <td className="text-[12.5px] whitespace-nowrap align-baseline">{ago(r.startedAt, nowMs)}</td>
                   </tr>
                 );
               })}
