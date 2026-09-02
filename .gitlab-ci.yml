@@ -1,0 +1,32 @@
+# Esquire Agent Console - CI
+#
+# Prototype-grade: install, lint, typecheck, build. There is no test suite yet
+# because there is no business logic worth asserting on; the state machine in
+# src/lib/store.tsx is the first thing that deserves one.
+
+image: node:24-alpine
+
+stages:
+  - verify
+
+default:
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+
+verify:
+  stage: verify
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+  script:
+    - npx tsc --noEmit
+    - npm run lint
+    - npm run build
+  artifacts:
+    when: on_failure
+    paths:
+      - .next/
+    expire_in: 1 day
